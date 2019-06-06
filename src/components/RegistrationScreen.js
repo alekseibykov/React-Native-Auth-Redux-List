@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
-import { Button, Card, CardSection } from './components/common';
+import { Button, Card, CardSection } from './common';
 
 class RegistrationScreen extends Component {
   constructor(props) {
