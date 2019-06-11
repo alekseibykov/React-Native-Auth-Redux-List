@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import { View, TextInput, Text, ActivityIndicator } from 'react-native';
 import { Button, Card, CardSection } from './common';
 
@@ -14,19 +14,14 @@ class LoginForm extends Component {
     };
   }
 
-  onPress() {
+  async onPress() {
     const { email, password } = this.state;
 
     this.setState({ error: '', loading: true });
     console.log('Waiting...');
 
-    firebase.auth().signInWithEmailAndPassword(email, password);
+    await firebase.auth().signInWithEmailAndPassword(email, password);
     console.log('Done 1');
-
-    setTimeout(() => {
-      console.log('privet privet');
-      this.onLoginSuccess();
-    }, 7000);
 
     console.log('Done 2');
   }

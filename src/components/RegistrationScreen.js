@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Button, Card, CardSection } from './common';
 
