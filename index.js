@@ -2,8 +2,50 @@
  * @format
  */
 
+ import React from 'react';
 import {AppRegistry} from 'react-native';
-import App from './src/App';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import {name as appName} from './app.json';
+import AppNavigator from './src/AppNavigator';
+import ListReducer from './src/reducers/ListReducer';
+
+const store = createStore(ListReducer);
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      possibleFriends: [
+        'Allie',
+        'Gator',
+        'Lizzie',
+      ],
+      currentFriends: [
+        'Alex'
+      ],
+    }
+  }
+
+  addFriend = (index) => {
+    // ...
+  }
+
+  render() {
+    return (
+      <Provider store={ store }>
+        <AppNavigator
+          screenProps={ {
+            currentFriends: this.state.currentFriends,
+            possibleFriends: this.state.possibleFriends,
+            addFriend: this.addFriend,
+          } }
+        />
+      </Provider>
+    );
+  }
+}
+
+
 
 AppRegistry.registerComponent(appName, () => App);

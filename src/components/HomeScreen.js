@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import firebase from 'react-native-firebase';
 import { Header, Button } from './common';
 import LoginForm from './LoginForm';
+import ContentScreen from './ContentScreen';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -24,9 +25,7 @@ class HomeScreen extends Component {
     let self = this;
     if (this.state.loggedIn) {
       return (
-        <Button style={{ height: 70 }} onPress={() => firebase.auth().signOut()}>
-          Log Out
-        </Button>
+        <ContentScreen screenProps={this.props.screenProps} />
       );
     } else if (this.state.loggedIn === false) {
       return (

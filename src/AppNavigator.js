@@ -7,6 +7,6 @@ const MainNavigator = createStackNavigator({
   Registration: {screen: RegistrationScreen},
 });
 
-const App = createAppContainer(MainNavigator);
+const AppNavigator = createAppContainer(MainNavigator);
 
-export default App;
+export default AppNavigator;
