@@ -3,6 +3,8 @@ import firebase from 'react-native-firebase';
 import { View, TextInput, TouchableOpacity, Text, FlatList } from 'react-native';
 import { Button, Card, CardSection } from './common';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { expandItem } from '../actions/ListActions';
 
 class ContentScreen extends Component {
   constructor(props) {
@@ -11,22 +13,21 @@ class ContentScreen extends Component {
   }
 
   onPressButton(item) {
-    this.setState({ show: item.id })
+    this.props.expandItem(item.id)
   }
 
   renderDescription(item) {
-    if (this.state.show === item.id) {
+    if (this.props.show.show === item.id) {
       return <Text>{item.description}</Text>;
     }
     return null;
   }
 
   render() {
-    // console.log(this.props.content.default);
     return (
       <View style={{ flex: 1 }}>
         <FlatList
-          extraData={this.state}
+          extraData={this.props.show}
           data={this.props.content.default}
           renderItem={({item}) => (
             <View>
@@ -50,8 +51,14 @@ class ContentScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { content } = state
-  return { content }
+  const { content, show } = state
+  return { content, show }
 };
 
-export default connect(mapStateToProps)(ContentScreen);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    expandItem,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContentScreen);
